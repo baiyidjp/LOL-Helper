@@ -21,11 +21,11 @@
 
     self = [super init];
     if (self) {
-        self.frame = CGRectMake(0, 20, KWIDTH, 44);
+        self.frame = CGRectMake(0, 0, KWIDTH, KNAVHEIGHT);
         self.title = title;
         self.ctrl = ctrl;
         self.isHiddenBack = isHiddenBack;
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"nav_bar_bg_for_seven"]];
         [self creatSubViews];
     }
     return self;
@@ -39,7 +39,7 @@
     [self addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(KMARGIN+KMARGIN/2);
-        make.top.offset(self.mj_h/2-10);
+        make.top.offset(self.height/2-10);
         make.width.equalTo(@11);
         make.height.equalTo(@20);
     }];
@@ -51,7 +51,7 @@
     [self addSubview:backBtnTop];
     [backBtnTop mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(KMARGIN);
-        make.top.offset(self.mj_h/2-10);
+        make.top.offset(self.height/2-10);
         make.width.equalTo(@30);
         make.height.equalTo(@20);
     }];
@@ -59,7 +59,7 @@
     titleLabel = [[UILabel alloc]init];
     titleLabel.text = self.title;
     titleLabel.font = [UIFont boldSystemFontOfSize:17];
-    titleLabel.textColor = [UIColor colorFromHexString:@"000000"];
+    titleLabel.textColor = [UIColor colorWithHexString:@"000000"];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:titleLabel];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -67,13 +67,13 @@
         make.centerY.equalTo(backBtn.mas_centerY);
     }];
     
-    UIView *lineView = [[UIView alloc]init];
-    lineView.backgroundColor = [UIColor colorFromHexString:@"e5e5e5"];
-    [self addSubview:lineView];
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.offset(0);
-        make.height.equalTo(@1);
-    }];
+//    UIView *lineView = [[UIView alloc]init];
+//    lineView.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
+//    [self addSubview:lineView];
+//    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.bottom.offset(0);
+//        make.height.equalTo(@1);
+//    }];
 }
 
 - (void)backBtn{

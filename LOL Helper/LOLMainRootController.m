@@ -38,11 +38,6 @@
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)setControllersWithController:(UIViewController *)controller Title:(NSString *)title ImageName:(NSString *)imageName SelectImageName:(NSString *)selectImageName
 {
     
@@ -50,11 +45,10 @@
     controller.tabBarItem.title = title;
     controller.tabBarItem.image = [UIImage imageNamed:imageName];
     controller.tabBarItem.selectedImage = [[UIImage imageNamed:selectImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [controller.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : RGBColor(174, 136, 68)} forState:UIControlStateSelected];
+    [controller.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : DefaultGodColor} forState:UIControlStateSelected];
     [controller.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"888888"]} forState:UIControlStateNormal];
 
     LOLNavigationController *navCtrl = [[LOLNavigationController alloc]initWithRootViewController:controller];
-    [controller.navigationController.navigationBar setHidden:YES];
     [self addChildViewController:navCtrl];
 
 }

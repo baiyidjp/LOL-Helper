@@ -18,12 +18,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    //设置NavigationBar背景颜色
-//    [self.navigationBar setBarTintColor:[UIColor colorWithRed:54/255.0 green:53/255.0 blue:58/255.0 alpha:1]];
-//    //@{}代表Dictionary
-//    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:RGBColor(174, 136, 68)}];
-//    //设置item字体的颜色
-//    [self.navigationBar setTintColor:RGBColor(174, 136, 68)];
+    //设置NavigationBar背景颜色
+    [self.navigationBar setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"nav_bar_bg_for_seven"]]];
+    //@{}代表Dictionary
+    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:DefaultGodColor}];
+    //设置item字体的颜色
+    [self.navigationBar setTintColor:DefaultGodColor];
     //不设置这个无法修改状态栏字体颜色
     [self.navigationBar setBarStyle:UIBarStyleBlack];
     

@@ -26,5 +26,7 @@
 #else
 #define NSLog(...)
 #endif
+//默认金色
+#define DefaultGodColor RGBColor(174, 136, 68)
 
 #endif /* LOL_DefineValue_h */
