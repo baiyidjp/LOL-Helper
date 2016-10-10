@@ -96,7 +96,7 @@
     _newsTitleLable.text = newsModel.title;
     
     _newsSummaryLabel.text = newsModel.summary;
-    _newsTimeLable.text = [self timeFromTimestamp:newsModel.publication_date];
+    _newsTimeLable.text = [LOLBaseMethod timeWithDate:newsModel.publication_date];
     
     BOOL isHiddenTime = [newsType isEqualToString:@"专题"];
     _newsReadLabel.hidden = _newsTimeLable.hidden = isHiddenTime;
@@ -155,7 +155,7 @@
     _newsSummaryLabel.frame = CGRectMake(_newsTitleLable.left, CGRectGetMaxY(_newsTitleLable.frame)+KMARGIN*0.5, _newsTitleLable.width, summaryH);
     
     CGFloat timeW = [LOLBaseMethod LabelWidthOfString:_newsTimeLable.text withFont:FONTSIZE(11) withHeight:MAXFLOAT];
-    _newsTimeLable.frame = CGRectMake(_newsTitleLable.left, CGRectGetMaxY(_newsImage.frame)-KMARGIN*0.5, timeW, 11);
+    _newsTimeLable.frame = CGRectMake(_newsTitleLable.left, CGRectGetMaxY(_newsImage.frame)-KMARGIN*0.6, timeW, 11);
     
     CGFloat readW = [LOLBaseMethod LabelWidthOfString:readText withFont:FONTSIZE(11) withHeight:MAXFLOAT];
     _newsReadLabel.frame = CGRectMake(CGRectGetMaxX(_newsTimeLable.frame)+KMARGIN*0.5, _newsTimeLable.top, readW, 11);
@@ -164,56 +164,6 @@
     _newsTypeLabel.frame = CGRectMake(CGRectGetWidth(_backView.frame)-typeW-KMARGIN*0.5, CGRectGetHeight(_backView.frame)-2*KMARGIN, typeW, 17);
     
     _newsReportView.frame = CGRectMake(_newsTitleLable.left, CGRectGetMidY(_newsImage.frame)-KMARGIN/2.0, _newsTitleLable.width, 11);
-}
-
-/**
-  * 时间戳转成字符串
-  *
-  * @param timestamp 时间戳
-  *
-  * @return 格式化后的字符串
-  */
-- (NSString *)timeFromTimestamp:(NSString *)timestamp{
-
-    NSDateFormatter *dateFormtter =[[NSDateFormatter alloc] init];
-    dateFormtter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    NSDate *d = [dateFormtter dateFromString:timestamp];
-    NSTimeInterval late=[d timeIntervalSince1970]*1; //转记录的时间戳
-    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
-    NSTimeInterval now=[dat timeIntervalSince1970]*1; //获取当前时间戳
-    NSString *timeString=@"";
-    NSTimeInterval cha=now-late;
-    // 发表在一小时之内
-    if (cha/3600<1) {
-        if (cha/60<1) {
-            timeString = @"1";
-        }else{
-            timeString = [NSString stringWithFormat:@"%f", cha/60];
-            timeString = [timeString substringToIndex:timeString.length-7];
-        }
-
-        timeString=[NSString stringWithFormat:@"%@分钟前", timeString];
-    }
-    // 在一小时以上24小以内
-    else if (cha/3600>1&&cha/86400<1) {
-        timeString = [NSString stringWithFormat:@"%f", cha/3600];
-        timeString = [timeString substringToIndex:timeString.length-7];
-        timeString=[NSString stringWithFormat:@"%@小时前", timeString];
-    }
-    // 发表在24以上10天以内
-    //86400 = 60(分)*60(秒)*24(小时) 3天内
-    else if (cha/86400>1&&cha/86400*3<1) {
-            timeString = [NSString stringWithFormat:@"%f", cha/86400];
-            timeString = [timeString substringToIndex:timeString.length-7];
-            timeString=[NSString stringWithFormat:@"%@天前", timeString];
-    }
-    // 发表时间大于10天
-    else {
-            [dateFormtter setDateFormat:@"yyyy-MM-dd"];
-            timeString = [dateFormtter stringFromDate:d];
-    }
-
-    return timeString;
 }
 
 @end

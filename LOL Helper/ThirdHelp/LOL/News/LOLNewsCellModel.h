@@ -34,6 +34,12 @@
 @property(nonatomic,copy)NSString *march_result;
 @property(nonatomic,copy)NSString *teama_logo;
 @property(nonatomic,copy)NSString *teamb_logo;
+//图集相关
+@property(nonatomic,copy)NSString *big_image_url;
+@property(nonatomic,copy)NSString *small_image_url;
+@property(nonatomic,copy)NSString *count_image_url;
+/** 图个数 */
+@property(nonatomic,copy)NSString *count;
 /*
  "article_id": "23818",
  "content_id": "23818",
@@ -72,6 +78,15 @@
  "march_result": "0:1",
  "teama_logo": "http://shp.qpic.cn/lolwebvideo/201501/b46891d51c3cf54d795ee968b519cf94/0",
  "teamb_logo": "http://shp.qpic.cn/lolwebvideo/201501/708dee8948c5b153c839bef384953bda/0"
+ 图片
+ "pics_id": "92",
+ "big_image_url": "http://ossweb-img.qq.com/upload/qqtalk/news/201610/101723139849621_480.jpg",
+ "big_index": "0",
+ "count": "8",
+ "small_image_url": "http://ossweb-img.qq.com/upload/qqtalk/news/201610/101723139858_480.jpg",
+ "small_index": "0",
+ "count_image_url": "http://ossweb-img.qq.com/upload/qqtalk/news/201610/101723139853831_480.jpg",
+ "imageset_id": "92"
  */
 
 @end

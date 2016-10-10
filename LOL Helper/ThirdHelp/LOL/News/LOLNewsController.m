@@ -12,6 +12,7 @@
 #import "LOLNewsScrollCellModel.h"
 #import "LOLNewsListCell.h"
 #import "LOLNewsCellModel.h"
+#import "LOLNewsImagesCell.h"
 
 @interface LOLNewsController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -73,6 +74,7 @@
     _newsTableView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4"];
     [_newsTableView registerClass:[LOLNewsScrollCell class] forCellReuseIdentifier:@"LOLNewsScrollCell"];
     [_newsTableView registerClass:[LOLNewsListCell class] forCellReuseIdentifier:@"LOLNewsListCell"];
+    [_newsTableView registerClass:[LOLNewsImagesCell class] forCellReuseIdentifier:@"LOLNewsImagesCell"];
     [self.view addSubview:_newsTableView];
 }
 
@@ -126,7 +128,9 @@
     }
     LOLNewsCellModel *newsModel = [_newsListArray objectAtIndex:indexPath.row];
     if ([newsModel.newstype isEqualToString:@"图集"]) {
-        return [[UITableViewCell alloc]init];
+        LOLNewsImagesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LOLNewsImagesCell"];
+        cell.newsModel = newsModel;
+        return cell;
     }
     LOLNewsListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LOLNewsListCell"];
     cell.newsModel = newsModel;
@@ -138,6 +142,11 @@
     if (indexPath.section == 0) {
         return KWIDTH*IMAGE_SCALE;
     }
+    LOLNewsCellModel *newsModel = [_newsListArray objectAtIndex:indexPath.row];
+    if ([newsModel.newstype isEqualToString:@"图集"]) {
+        return 210;
+    }
+
     return 92.5;
 }
 

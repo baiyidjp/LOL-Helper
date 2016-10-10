@@ -143,7 +143,7 @@
         return;
     }
     UIPageControl *pageControl = [[UIPageControl alloc]init];
-    pageControl.currentPageIndicatorTintColor = [UIColor colorWithHexString:@"000000"];
+    pageControl.currentPageIndicatorTintColor = DefaultGodColor;
     pageControl.pageIndicatorTintColor = [UIColor colorWithHexString:@"888888"];
     pageControl.numberOfPages = self.imageUrls.count;
     pageControl.frame = CGRectMake(0, viewH - 15, viewW, 15);

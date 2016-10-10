@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class LOLNewsCellModel;
 @interface LOLNewsImagesCell : UITableViewCell
+
+/** model */
+@property(nonatomic,strong) LOLNewsCellModel *newsModel;
 
 @end
