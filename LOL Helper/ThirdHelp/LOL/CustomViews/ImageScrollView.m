@@ -7,6 +7,7 @@
 //
 
 #import "ImageScrollView.h"
+#import "LOLNewsScrollCellModel.h"
 
 #define PLACEHOLDER_NAME @"D_200-200"
 #define ISAUTOSCROLL YES
@@ -44,7 +45,7 @@
 /**
  *  图片的路经集合
  */
-@property(nonatomic,strong)NSArray *imageUrls;
+@property(nonatomic,strong)NSMutableArray *imageUrls;
 @end
 
 @implementation ImageScrollView
@@ -52,6 +53,14 @@
     CGFloat viewW;
     CGFloat viewH;
     NSInteger count;
+}
+
+- (NSMutableArray *)imageUrls{
+    
+    if (!_imageUrls) {
+        _imageUrls = [NSMutableArray array];
+    }
+    return _imageUrls;
 }
 
 + (ImageScrollView *)returnImageScrollViewWithFrame:(CGRect)frame imageUrl:(NSArray *)imageUrls placeholderImageName:(NSString *)placeholderImageName isAutoScroll:(BOOL)isAutoScroll scrollTime:(NSInteger)scrollTime{
@@ -87,7 +96,10 @@
         [self creatScrollView];
         
         if (imageUrls.count) {
-            self.imageUrls = imageUrls;
+            for (LOLNewsScrollCellModel *model in imageUrls) {
+                NSString *imageUrl = model.image_url_big;
+                [self.imageUrls addObject:imageUrl];
+            }
             [self creatPageControl];
             [self addImageView];
         }
@@ -103,7 +115,10 @@
     
     _imageUpdateUrls = imageUpdateUrls;
     if (imageUpdateUrls.count) {
-        self.imageUrls = imageUpdateUrls;
+        for (LOLNewsScrollCellModel *model in imageUpdateUrls) {
+            NSString *imageUrl = model.image_url_big;
+            [self.imageUrls addObject:imageUrl];
+        }
         [self creatPageControl];
         [self addImageView];
     }
@@ -145,31 +160,26 @@
     //上一张
     UIImageView* preImageView = [[UIImageView alloc] init];
     self.preImageView = preImageView;
-    preImageView.frame = CGRectMake((viewW-viewH)/2, 0, viewH, viewH);
-    
-    UIView *backView_1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, viewW, viewH)];
-    backView_1.backgroundColor = [UIColor whiteColor];
-    [backView_1 addSubview:preImageView];
-    [self.scrollView addSubview:backView_1];
+    preImageView.frame = CGRectMake(0, 0, viewW, viewH);
+    [self.scrollView addSubview:preImageView];
     
     //下一张
     UIImageView* nextImageView = [[UIImageView alloc] init];
     self.nextImageView = nextImageView;
-    nextImageView.frame = CGRectMake((viewW-viewH)/2, 0, viewH, viewH);
-    UIView *backView_2 = [[UIView alloc]initWithFrame:CGRectMake(2*viewW, 0, viewW, viewH)];
-    backView_2.backgroundColor = [UIColor whiteColor];
-    [backView_2 addSubview:nextImageView];
-    [self.scrollView addSubview:backView_2];
+    nextImageView.frame = CGRectMake(2*viewW, 0, viewW, viewH);
+    [self.scrollView addSubview:nextImageView];
     //当前
     UIImageView* currentImageView = [[UIImageView alloc] init];
     self.currentImageView = currentImageView;
-    currentImageView.frame = CGRectMake((viewW-viewH)/2, 0, viewH, viewH);
+    currentImageView.frame = CGRectMake(viewW, 0, viewW, viewH);
 #warning 用到了SDWebImage 若报错 请自行导入
     [currentImageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrls[0]] placeholderImage:[UIImage imageNamed:self.placeholderImageName]];
-    UIView *backView_3 = [[UIView alloc]initWithFrame:CGRectMake(viewW, 0, viewW, viewH)];
-    backView_3.backgroundColor = [UIColor whiteColor];
-    [backView_3 addSubview:currentImageView];
-    [self.scrollView addSubview:backView_3];
+    [self.scrollView addSubview:currentImageView];
+    
+//    UIButton *clickBtn = [[UIButton alloc]initWithFrame:currentImageView.frame];
+//    [clickBtn addTarget:self action:@selector(clickImage) forControlEvents:UIControlEventTouchUpInside];
+//    [self.scrollView addSubview:clickBtn];
+
     
 }
 
@@ -211,7 +221,9 @@
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView{
     
     NSInteger imageCount = self.imageUrls.count;
-    
+    if (!imageCount) {
+        return;
+    }
     if (self.preImageView.image == nil || self.nextImageView.image == nil) {
 #warning 用到了SDWebImage 若报错 请自行导入        
         [self.preImageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrls[self.index == 0 ? imageCount - 1 : self.index - 1]] placeholderImage:[UIImage imageNamed:self.placeholderImageName]];

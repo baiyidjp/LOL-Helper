@@ -13,5 +13,7 @@
 #define LOL_URL_SCROLLIMAGE @"http://qt.qq.com/static/pages/news/phone/c13_list_1.shtml"
 //资讯列表
 #define LOL_URL_NEWSLIST  @"http://qt.qq.com/php_cgi/news/php/varcache_getnews.php?id=12&page=0&plat=ios&version=33"
+//html的BaseUrl
+#define LOL_HTML_BASEURL @"http://qt.qq.com/static/pages/news/phone/"
 
 #endif /* LOL_Request_h */

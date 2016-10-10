@@ -8,6 +8,10 @@
 
 #import "LOLNewsController.h"
 #import "ImageScrollView.h"
+#import "LOLNewsScrollCell.h"
+#import "LOLNewsScrollCellModel.h"
+#import "LOLNewsListCell.h"
+#import "LOLNewsCellModel.h"
 
 @interface LOLNewsController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -19,8 +23,11 @@
     UIButton *_headIconBtn;
     UIButton *_searchBtn;
     UITableView *_newsTableView;
+    NSArray *_scrollImageArray;
+    NSMutableArray *_newsListArray;
 }
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -30,14 +37,16 @@
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-//    _newsScrollView = [ImageScrollView returnImageScrollViewWithFrame:CGRectMake(0, 0, KWIDTH, KWIDTH*9/16.0) imageUrl:nil isAutoScroll:NO];
+    
+    _newsListArray = [NSMutableArray array];
     
     [self configViews];
+    [self requestNewsData];
 }
 
 #pragma mark - 创建view
-- (void)configViews{
-    
+- (void)configViews
+{
     _headIconBtn = [[UIButton alloc]init];
     _headIconBtn.layer.cornerRadius = 20;
     _headIconBtn.layer.borderWidth = 2;
@@ -61,9 +70,40 @@
     _newsTableView.delegate = self;
     _newsTableView.dataSource = self;
     _newsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _newsTableView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4"];
+    [_newsTableView registerClass:[LOLNewsScrollCell class] forCellReuseIdentifier:@"LOLNewsScrollCell"];
+    [_newsTableView registerClass:[LOLNewsListCell class] forCellReuseIdentifier:@"LOLNewsListCell"];
     [self.view addSubview:_newsTableView];
 }
 
+#pragma mark - request
+- (void)requestNewsData
+{
+    [LOLRequest getWithUrl:LOL_URL_SCROLLIMAGE params:nil success:^(id responseObject) {
+        NSArray *list = [responseObject objectForKey:@"list"];
+        _scrollImageArray = [LOLNewsScrollCellModel mj_objectArrayWithKeyValuesArray:list];
+        [self requestNewsList];
+    } failure:^(NSError *error) {
+        [self.view makeToast:@"请求出错"];
+    }];
+    
+}
+
+#pragma mark - news_list
+- (void)requestNewsList{
+    
+    [LOLRequest getWithUrl:LOL_URL_NEWSLIST params:nil success:^(id responseObject) {
+        NSLog(@"newslist -- %@",responseObject);
+        NSArray *list = [responseObject objectForKey:@"list"];
+        [_newsListArray removeAllObjects];
+        if (list.count) {
+            [_newsListArray addObjectsFromArray:[LOLNewsCellModel mj_objectArrayWithKeyValuesArray:list]];
+            [_newsTableView reloadData];
+        }
+    } failure:^(NSError *error) {
+        [self.view makeToast:@"请求出错"];
+    }];
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
@@ -74,29 +114,49 @@
     if (section == 0) {
         return 1;
     }
-    return 20;
+    return _newsListArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    cell.textLabel.text = [NSString stringWithFormat:@"%zd组 %zd行",indexPath.section,indexPath.row];
-    cell.backgroundColor = [UIColor redColor];
+    if (indexPath.section == 0) {
+        LOLNewsScrollCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LOLNewsScrollCell"];
+        cell.imageUrlArray = _scrollImageArray;
+        return cell;
+    }
+    LOLNewsListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LOLNewsListCell"];
+    cell.newsModel = [_newsListArray objectAtIndex:indexPath.row];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        return KWIDTH*IMAGE_SCALE;
+    }
+    return 92.5;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 1) {
+        return 44;
+    }
+    return 0;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat offsetY = scrollView.contentOffset.y; //+ tableView.contentInset.top;//注意
-    NSLog(@"%f",offsetY);
-    CGFloat panTranslationY = [scrollView.panGestureRecognizer translationInView:_newsTableView].y;//在tableVIEW的移动的坐标
+    CGFloat offsetY = scrollView.contentOffset.y;
 #pragma mark 隐藏导航栏
-    if (offsetY > 64) {
+    if (offsetY > KWIDTH*IMAGE_SCALE - KNAVHEIGHT) {
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1.0];
         self.navigationItem.title = @"董江鹏";
+        _newsTableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
     }else{
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0.0];
         self.navigationItem.title = @"";
+        _newsTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     }
 }
 

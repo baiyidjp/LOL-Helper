@@ -28,5 +28,6 @@
 #endif
 //默认金色
 #define DefaultGodColor RGBColor(174, 136, 68)
-
+//图片比例
+#define IMAGE_SCALE 250.0/520.0
 #endif /* LOL_DefineValue_h */

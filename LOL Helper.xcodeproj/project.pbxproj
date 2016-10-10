@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		8181234488B7BD07AD84C711 /* libPods-LOL Helper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF0B83CD7AC9D2FED3F2361 /* libPods-LOL Helper.a */; };
+		A22BFE771DAB322500E2585C /* LOLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A22BFE761DAB322500E2585C /* LOLRequest.m */; };
+		A22BFE7A1DAB34D400E2585C /* LOLNewsScrollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A22BFE791DAB34D400E2585C /* LOLNewsScrollCell.m */; };
+		A22BFE7D1DAB38C100E2585C /* LOLNewsScrollCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A22BFE7C1DAB38C100E2585C /* LOLNewsScrollCellModel.m */; };
+		A22BFE801DAB61A900E2585C /* LOLNewsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A22BFE7F1DAB61A900E2585C /* LOLNewsCellModel.m */; };
+		A22BFE831DAB659600E2585C /* LOLNewsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A22BFE821DAB659600E2585C /* LOLNewsListCell.m */; };
+		A22BFE871DAB7A7400E2585C /* LOLBaseMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = A22BFE861DAB7A7400E2585C /* LOLBaseMethod.m */; };
 		A27189A71DAA1746003C7B87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A27189A61DAA1746003C7B87 /* main.m */; };
 		A27189AA1DAA1746003C7B87 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A27189A91DAA1746003C7B87 /* AppDelegate.m */; };
 		A27189B21DAA1747003C7B87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A27189B11DAA1747003C7B87 /* Assets.xcassets */; };
@@ -78,6 +84,18 @@
 /* Begin PBXFileReference section */
 		612C086A9F5AA7C197D9AF8D /* Pods-LOL Helper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LOL Helper.release.xcconfig"; path = "Pods/Target Support Files/Pods-LOL Helper/Pods-LOL Helper.release.xcconfig"; sourceTree = "<group>"; };
 		90E7B66430FF25BD6B82A09F /* Pods-LOL Helper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LOL Helper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LOL Helper/Pods-LOL Helper.debug.xcconfig"; sourceTree = "<group>"; };
+		A22BFE751DAB322500E2585C /* LOLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLRequest.h; sourceTree = "<group>"; };
+		A22BFE761DAB322500E2585C /* LOLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLRequest.m; sourceTree = "<group>"; };
+		A22BFE781DAB34D400E2585C /* LOLNewsScrollCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLNewsScrollCell.h; sourceTree = "<group>"; };
+		A22BFE791DAB34D400E2585C /* LOLNewsScrollCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLNewsScrollCell.m; sourceTree = "<group>"; };
+		A22BFE7B1DAB38C100E2585C /* LOLNewsScrollCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLNewsScrollCellModel.h; sourceTree = "<group>"; };
+		A22BFE7C1DAB38C100E2585C /* LOLNewsScrollCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLNewsScrollCellModel.m; sourceTree = "<group>"; };
+		A22BFE7E1DAB61A900E2585C /* LOLNewsCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLNewsCellModel.h; sourceTree = "<group>"; };
+		A22BFE7F1DAB61A900E2585C /* LOLNewsCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLNewsCellModel.m; sourceTree = "<group>"; };
+		A22BFE811DAB659600E2585C /* LOLNewsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLNewsListCell.h; sourceTree = "<group>"; };
+		A22BFE821DAB659600E2585C /* LOLNewsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLNewsListCell.m; sourceTree = "<group>"; };
+		A22BFE851DAB7A7400E2585C /* LOLBaseMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLBaseMethod.h; sourceTree = "<group>"; };
+		A22BFE861DAB7A7400E2585C /* LOLBaseMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLBaseMethod.m; sourceTree = "<group>"; };
 		A27189A21DAA1746003C7B87 /* LOL Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LOL Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27189A61DAA1746003C7B87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A27189A81DAA1746003C7B87 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -189,6 +207,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A22BFE741DAB320900E2585C /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				A22BFE751DAB322500E2585C /* LOLRequest.h */,
+				A22BFE761DAB322500E2585C /* LOLRequest.m */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		A22BFE841DAB7A6100E2585C /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A22BFE851DAB7A7400E2585C /* LOLBaseMethod.h */,
+				A22BFE861DAB7A7400E2585C /* LOLBaseMethod.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		A27189991DAA1746003C7B87 = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +253,8 @@
 				A27189D81DAA1766003C7B87 /* images */,
 				A27189ED1DAA1FDB003C7B87 /* ThirdHelp */,
 				A2718A081DAA2524003C7B87 /* LOL */,
+				A22BFE741DAB320900E2585C /* Request */,
+				A22BFE841DAB7A6100E2585C /* Base */,
 				A27189A81DAA1746003C7B87 /* AppDelegate.h */,
 				A27189A91DAA1746003C7B87 /* AppDelegate.m */,
 				A27189EA1DAA1870003C7B87 /* LOLMainRootController.h */,
@@ -351,6 +389,14 @@
 			children = (
 				A2718A0D1DAA2549003C7B87 /* LOLNewsController.h */,
 				A2718A0E1DAA2549003C7B87 /* LOLNewsController.m */,
+				A22BFE781DAB34D400E2585C /* LOLNewsScrollCell.h */,
+				A22BFE791DAB34D400E2585C /* LOLNewsScrollCell.m */,
+				A22BFE7B1DAB38C100E2585C /* LOLNewsScrollCellModel.h */,
+				A22BFE7C1DAB38C100E2585C /* LOLNewsScrollCellModel.m */,
+				A22BFE7E1DAB61A900E2585C /* LOLNewsCellModel.h */,
+				A22BFE7F1DAB61A900E2585C /* LOLNewsCellModel.m */,
+				A22BFE811DAB659600E2585C /* LOLNewsListCell.h */,
+				A22BFE821DAB659600E2585C /* LOLNewsListCell.m */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -612,8 +658,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A27189FE1DAA1FDB003C7B87 /* UIView+Toast.m in Sources */,
+				A22BFE801DAB61A900E2585C /* LOLNewsCellModel.m in Sources */,
 				A27189FD1DAA1FDB003C7B87 /* UIView+Frame.m in Sources */,
 				A2718A041DAA21FF003C7B87 /* LOLBaseViewController.m in Sources */,
+				A22BFE7A1DAB34D400E2585C /* LOLNewsScrollCell.m in Sources */,
 				A2718A211DAA2B34003C7B87 /* CustomTopView.m in Sources */,
 				A27189FC1DAA1FDB003C7B87 /* UIView+BlockGesture.m in Sources */,
 				A27189EC1DAA1870003C7B87 /* LOLMainRootController.m in Sources */,
@@ -621,13 +669,17 @@
 				A2718A121DAA2553003C7B87 /* LOLMeViewController.m in Sources */,
 				A2718A071DAA2495003C7B87 /* LOLNavigationController.m in Sources */,
 				A27189FF1DAA1FDB003C7B87 /* UIView+Visuals.m in Sources */,
+				A22BFE871DAB7A7400E2585C /* LOLBaseMethod.m in Sources */,
 				A27189FA1DAA1FDB003C7B87 /* UIColor+Extension.m in Sources */,
 				A27189FB1DAA1FDB003C7B87 /* UIView+Animation.m in Sources */,
 				A27189AA1DAA1746003C7B87 /* AppDelegate.m in Sources */,
 				A2718A181DAA256B003C7B87 /* LOLFoundController.m in Sources */,
 				A2718A0F1DAA2549003C7B87 /* LOLNewsController.m in Sources */,
 				A2718A221DAA2B34003C7B87 /* ImageScrollView.m in Sources */,
+				A22BFE831DAB659600E2585C /* LOLNewsListCell.m in Sources */,
 				A27189A71DAA1746003C7B87 /* main.m in Sources */,
+				A22BFE771DAB322500E2585C /* LOLRequest.m in Sources */,
+				A22BFE7D1DAB38C100E2585C /* LOLNewsScrollCellModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

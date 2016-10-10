@@ -17,12 +17,15 @@
 #ifdef __OBJC__
 //宏定义
 #import "LOL_DefineValue.h"
+#import "LOL_Request.h"
 //自定义
 #import "UIColor+Extension.h"
 #import "UIView+Toast.h"
 #import "UIView+Frame.h"
 #import "CustomTopView.h"
 #import "LOLBaseViewController.h"
+#import "LOLRequest.h"
+#import "LOLBaseMethod.h"
 //第三方
 #import "AFNetworking.h"
 #import "Masonry.h"
