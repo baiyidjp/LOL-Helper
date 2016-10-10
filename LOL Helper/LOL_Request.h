@@ -15,5 +15,7 @@
 #define LOL_URL_NEWSLIST  @"http://qt.qq.com/php_cgi/news/php/varcache_getnews.php?id=12&page=0&plat=ios&version=33"
 //html的BaseUrl
 #define LOL_HTML_BASEURL @"http://qt.qq.com/static/pages/news/phone/"
+//组头分类
+#define LOL_CLASS @"http://qt.qq.com/php_cgi/news/php/varcache_channel.php?plat=ios&version=2"
 
 #endif /* LOL_Request_h */

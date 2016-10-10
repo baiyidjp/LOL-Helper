@@ -28,6 +28,12 @@
 @property(nonatomic,copy)NSString *newstypeid;
 //是否置顶
 @property(nonatomic,copy)NSString *is_top;
+//战报相关
+@property(nonatomic,copy)NSString *teama_name;
+@property(nonatomic,copy)NSString *teamb_name;
+@property(nonatomic,copy)NSString *march_result;
+@property(nonatomic,copy)NSString *teama_logo;
+@property(nonatomic,copy)NSString *teamb_logo;
 /*
  "article_id": "23818",
  "content_id": "23818",
@@ -58,6 +64,14 @@
  "bmatchid": "0",
  "v_len": "",
  "pics_id": "0"
+ 战报
+ "match_date": "2016-10-10 08:00:00",
+ "match_name": "2016全球总决赛",
+ "teama_name": "IM",
+ "teamb_name": "C9",
+ "march_result": "0:1",
+ "teama_logo": "http://shp.qpic.cn/lolwebvideo/201501/b46891d51c3cf54d795ee968b519cf94/0",
+ "teamb_logo": "http://shp.qpic.cn/lolwebvideo/201501/708dee8948c5b153c839bef384953bda/0"
  */
 
 @end

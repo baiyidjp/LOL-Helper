@@ -124,8 +124,12 @@
         cell.imageUrlArray = _scrollImageArray;
         return cell;
     }
+    LOLNewsCellModel *newsModel = [_newsListArray objectAtIndex:indexPath.row];
+    if ([newsModel.newstype isEqualToString:@"图集"]) {
+        return [[UITableViewCell alloc]init];
+    }
     LOLNewsListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LOLNewsListCell"];
-    cell.newsModel = [_newsListArray objectAtIndex:indexPath.row];
+    cell.newsModel = newsModel;
     return cell;
 }
 
