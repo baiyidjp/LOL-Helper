@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LOLNewsDetailController : UIViewController
-
-- (instancetype)initWithType:(NSInteger)VC_type;
+@interface LOLNewsDetailController : LOLBaseViewController
 
 @property(nonatomic,strong)NSString *url;
 

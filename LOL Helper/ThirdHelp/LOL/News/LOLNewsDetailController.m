@@ -21,53 +21,41 @@
 @end
 
 @implementation LOLNewsDetailController
-{
-    NSInteger current_type;
-    NSString *topTitle;
-    NSArray *titleArray;
-    UIView *backLoadView;
-}
-- (void)viewWillAppear:(BOOL)animated{
-    
-    [super viewWillAppear:animated];
-//    [self.navigationController.navigationBar setHidden:YES];
-}
 
 - (void)viewWillDisappear:(BOOL)animated{
     
     [super viewWillDisappear:animated];
     [LOLRequest cancelAllOperations];
-//    [self.navigationController.navigationBar setHidden:NO];
-}
-
-- (instancetype)initWithType:(NSInteger)VC_type{
-    
-    self = [super init];
-    if (self) {
-        current_type = VC_type;
-    }
-    return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    backLoadView = [[UIView alloc]init];
-    [self.view addSubview:backLoadView];
-    [backLoadView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(KNAVHEIGHT);
-        make.left.right.offset(0);
-        make.bottom.offset(0);
-    }];
-    [backLoadView layoutIfNeeded];
     
     self.title = @"资讯详情";
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1.0];
+    
+    [self configMenuItem];
     [self configViews];
 }
 
+- (void)configMenuItem{
+    
+    // 导航栏的菜单按钮
+    UIImage *menuImage = [UIImage imageNamed:@"nearby_nav_more_view_normal"];
+    menuImage = [menuImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIButton *menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 10)];
+    [menuBtn setImage:menuImage forState:UIControlStateNormal];
+    [menuBtn addTarget:self action:@selector(menuBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
+    self.navigationItem.rightBarButtonItem = menuItem;
+}
+
+// 菜单按钮点击
+- (void)menuBtnPressed:(id)sender {
+    //分享
+}
 - (void)configViews{
     
     // 进度条
@@ -79,7 +67,7 @@
     
     // 网页
     if (IOS8x) {
-        WKWebView *wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, KNAVHEIGHT, KWIDTH, KHEIGHT-KNAVHEIGHT)];
+        WKWebView *wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT-KTABBARHEIGHT)];
         wkWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         wkWebView.backgroundColor = [UIColor whiteColor];
         wkWebView.navigationDelegate = self;
@@ -91,7 +79,7 @@
         self.wkWebView = wkWebView;
         
     }else {
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, KNAVHEIGHT, KWIDTH, KHEIGHT-KNAVHEIGHT)];
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT-KTABBARHEIGHT)];
         webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         webView.scalesPageToFit = YES;
         webView.backgroundColor = [UIColor whiteColor];
