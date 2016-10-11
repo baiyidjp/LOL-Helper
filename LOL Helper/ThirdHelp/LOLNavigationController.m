@@ -50,6 +50,19 @@
         [backBtn addTarget:self action:@selector(backBtnPressed) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *colseItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
         viewController.navigationItem.leftBarButtonItem = colseItem;
+        
+        
+////    setp1:需要获取系统自带滑动手势的target对象
+//        id target = self.navigationController.interactivePopGestureRecognizer.delegate;
+////    setp2:创建全屏滑动手势~调用系统自带滑动手势的target的action方法
+//        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
+////    step3:设置手势代理~拦截手势触发
+//        pan.delegate = self;
+////    step4:别忘了~给导航控制器的view添加全屏滑动手势
+//        [viewController.view addGestureRecognizer:pan];
+////    step5:将系统自带的滑动手势禁用
+//        viewController.navigationController.interactivePopGestureRecognizer.enabled = NO;
+
     }
     
     //这句代码的位置是一个关键

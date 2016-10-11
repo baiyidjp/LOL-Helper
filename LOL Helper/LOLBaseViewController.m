@@ -8,7 +8,7 @@
 
 #import "LOLBaseViewController.h"
 
-@interface LOLBaseViewController ()
+@interface LOLBaseViewController ()<UIGestureRecognizerDelegate>
 
 @end
 
@@ -26,5 +26,7 @@
     
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHexString:@"888888"];
+    
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
 @end
