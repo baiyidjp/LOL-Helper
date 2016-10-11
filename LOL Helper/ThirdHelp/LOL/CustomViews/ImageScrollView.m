@@ -95,6 +95,7 @@
         viewH = self.frame.size.height;
         [self creatScrollView];
         
+        [self.imageUrls removeAllObjects];
         if (imageUrls.count) {
             for (LOLNewsScrollCellModel *model in imageUrls) {
                 NSString *imageUrl = model.image_url_big;
@@ -114,6 +115,7 @@
 - (void)setImageUpdateUrls:(NSArray *)imageUpdateUrls{
     
     _imageUpdateUrls = imageUpdateUrls;
+    [self.imageUrls removeAllObjects];
     if (imageUpdateUrls.count) {
         for (LOLNewsScrollCellModel *model in imageUpdateUrls) {
             NSString *imageUrl = model.image_url_big;

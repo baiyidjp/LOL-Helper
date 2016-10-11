@@ -41,8 +41,13 @@
     
     _lineImageView = [[UIImageView alloc]init];
     _lineImageView.image = [UIImage imageNamed:@"personal_segment_selected_mark"];
-    [_classScrollView addSubview:_lineImageView];
 }
+
+- (void)setClassID:(NSString *)classID
+{
+    _classID = classID;
+}
+
 
 - (void)setClassModels:(NSArray *)classModels
 {
@@ -61,6 +66,8 @@
     CGFloat scrollW = leftMargin*2+count*midMargin+allTextW+colletW;
     _classScrollView.contentSize = CGSizeMake(scrollW, 0);
     
+    [_classScrollView removeAllSubViews];
+    [_classScrollView addSubview:_lineImageView];
     CGFloat classBtnMaxX = leftMargin;
     for (NSInteger i = 0; i < count+1; i++) {
         if (i < count) {
@@ -78,7 +85,7 @@
             CGFloat btnX = classBtnMaxX;
             classBtn.frame = CGRectMake(btnX, 15, btnW, 15);
             classBtnMaxX = CGRectGetMaxX(classBtn.frame)+midMargin;
-            if (i == 0) {
+            if ([model.id isEqualToString:self.classID]) {
                 _preSelectBtn = classBtn;
                 classBtn.selected = YES;
             }

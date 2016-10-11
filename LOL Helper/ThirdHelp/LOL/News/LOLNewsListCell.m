@@ -137,6 +137,8 @@
         typeColor = @"d0ac66";
     }else if ([newsType isEqualToString:@"俱乐部"]){
         typeColor = @"9793fe";
+    }else if ([newsType isEqualToString:@"活动"]){
+        typeColor = @"41c7d2";
     }
     _newsTypeLabel.textColor = [UIColor colorWithHexString:typeColor];
     _newsTypeLabel.layer.borderColor = [UIColor colorWithHexString:typeColor].CGColor;

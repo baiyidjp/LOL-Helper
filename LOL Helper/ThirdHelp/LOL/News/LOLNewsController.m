@@ -54,6 +54,7 @@
     
     [self configViews];
     [self requestNewsData];
+    [self configRefresh];
 }
 
 #pragma mark - 创建view
@@ -92,16 +93,39 @@
     _newsNormalClassView = [[LOLNewsNormalClassView alloc]initWithFrame:CGRectMake(0, 0, KWIDTH, 44)];
 }
 
+#pragma mark - refresh
+- (void)configRefresh{
+    
+    NSMutableArray *images = [NSMutableArray array];
+    for (NSInteger i = 1; i < 9; i++) {
+        NSString *imageName = [NSString stringWithFormat:@"personal_refresh_loading2%zd",i];
+        UIImage *image = [UIImage imageNamed:imageName];
+        [images addObject:image];
+    }
+    // Set the callback（一Once you enter the refresh status，then call the action of target，that is call [self loadNewData]）
+    MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestNewsData)];
+    // Set the ordinary state of animated images
+    [header setImages:[images copy] forState:MJRefreshStateIdle];
+    // Set the pulling state of animated images（Enter the status of refreshing as soon as loosen）
+    [header setImages:[images copy] forState:MJRefreshStatePulling];
+    // Set the refreshing state of animated images
+    [header setImages:[images copy] forState:MJRefreshStateRefreshing];
+    // Set header
+    header.lastUpdatedTimeLabel.hidden = YES;
+    _newsTableView.mj_header = header;
+}
+
 #pragma mark - request
 - (void)requestNewsData
 {
     [LOLRequest getWithUrl:LOL_URL_SCROLLIMAGE params:nil success:^(id responseObject) {
         NSArray *list = [responseObject objectForKey:@"list"];
         _scrollImageArray = [LOLNewsScrollCellModel mj_objectArrayWithKeyValuesArray:list];
-        [_newsTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        [_newsTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
         [self requestClass];
     } failure:^(NSError *error) {
         [self.view makeToast:@"requestNewsData请求出错"];
+        [_newsTableView.mj_header endRefreshing];
     }];
     
 }
@@ -121,14 +145,17 @@
                 [_newsNormalClass addObject:classModel];
             }
         }
-        _classID = [[_newsNormalClass firstObject] id];
-        _defaultClassID = _classID;
-        _newsNormalClassView.classModels = _newsNormalClass;
-        [_newsTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
-        _isHiddenSpecialClassView = !_newsSpecialClass.count;
+        _defaultClassID = [[_newsNormalClass firstObject] id];
+        [_newsTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+        if (_classID.length && ![_classID isEqualToString:_defaultClassID]) {
+            _isHiddenSpecialClassView = YES;
+        }else{
+            _isHiddenSpecialClassView = !_newsSpecialClass.count;
+        }
         [self requestNewsList];
     } failure:^(NSError *error) {
         [self.view makeToast:@"requestClass请求出错"];
+        [_newsTableView.mj_header endRefreshing];
     }];
 }
 
@@ -136,7 +163,7 @@
 - (void)requestNewsList{
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:_classID forKey:@"id"];
+    [params setObject:_classID.length ? _classID : _defaultClassID forKey:@"id"];
     [params setObject:@0 forKey:@"page"];
     [params setObject:@"ios" forKey:@"plat"];
     [params setObject:@33 forKey:@"version"];
@@ -146,21 +173,27 @@
         [_newsListArray removeAllObjects];
         if (list.count) {
             [_newsListArray addObjectsFromArray:[LOLNewsCellModel mj_objectArrayWithKeyValuesArray:list]];
-            [_newsTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+            [_newsTableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
         }
+        [_newsTableView.mj_header endRefreshing];
     } failure:^(NSError *error) {
         [self.view makeToast:@"requestNewsList请求出错"];
+        [_newsTableView.mj_header endRefreshing];
     }];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
         return 1;
+    }
+    
+    if (section == 1) {
+        return 0;
     }
     
     return _isHiddenSpecialClassView ? _newsListArray.count : _newsListArray.count+1;
@@ -234,6 +267,8 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 1) {
+        _newsNormalClassView.classID = _classID.length ? _classID : _defaultClassID;
+        _newsNormalClassView.classModels = _newsNormalClass;
         _newsNormalClassView.delegate = self;
         return _newsNormalClassView;
     }

@@ -122,4 +122,11 @@
     self.center = CGPointMake(self.center.x, centerY);
 }
 
+- (void)removeAllSubViews{
+    
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
+    }
+}
+
 @end

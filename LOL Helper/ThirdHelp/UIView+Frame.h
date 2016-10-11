@@ -25,4 +25,7 @@
 
 @property (nonatomic) CGFloat width;
 @property (nonatomic) CGFloat height;
+
+- (void)removeAllSubViews;
+
 @end

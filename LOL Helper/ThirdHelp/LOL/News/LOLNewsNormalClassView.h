@@ -19,6 +19,8 @@
 
 /** models */
 @property(nonatomic,strong)NSArray  *classModels;
+/** id */
+@property(nonatomic,strong)NSString *classID;
 
 @property(nonatomic,weak)id<LOLNewsNormalClassViewDeleagte> delegate;
 
