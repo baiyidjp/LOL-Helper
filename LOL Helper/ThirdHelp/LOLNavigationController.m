@@ -42,6 +42,14 @@
     if (self.childViewControllers.count) {
         //当前不是第一个子控制器，那么在push出去的时候隐藏底部的tabbar
         viewController.hidesBottomBarWhenPushed = YES;
+        // 导航栏的返回按钮
+        UIImage *backImage = [UIImage imageNamed:@"nav_btn_back_tiny_normal"];
+        backImage = [backImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 20)];
+        [backBtn setImage:backImage forState:UIControlStateNormal];
+        [backBtn addTarget:self action:@selector(backBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *colseItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+        viewController.navigationItem.leftBarButtonItem = colseItem;
     }
     
     //这句代码的位置是一个关键
@@ -49,7 +57,7 @@
     
 }
 
-- (void)back{
+- (void)backBtnPressed{
     [self popViewControllerAnimated:YES];
 }
 

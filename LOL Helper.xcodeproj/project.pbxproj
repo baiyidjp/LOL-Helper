@@ -47,6 +47,7 @@
 		A26AB3941DAC88F600D58CBC /* LOLNewsSpecialClassCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A26AB3931DAC88F600D58CBC /* LOLNewsSpecialClassCell.m */; };
 		A26AB3971DAC8A6F00D58CBC /* LOLNewsSpecialClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = A26AB3961DAC8A6F00D58CBC /* LOLNewsSpecialClassView.m */; };
 		A26AB39A1DACB52C00D58CBC /* LOLNewsNormalClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = A26AB3991DACB52C00D58CBC /* LOLNewsNormalClassView.m */; };
+		A26AB39D1DACEA5500D58CBC /* LOLNewsDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = A26AB39C1DACEA5500D58CBC /* LOLNewsDetailController.m */; };
 		A27189A71DAA1746003C7B87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A27189A61DAA1746003C7B87 /* main.m */; };
 		A27189AA1DAA1746003C7B87 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A27189A91DAA1746003C7B87 /* AppDelegate.m */; };
 		A27189B21DAA1747003C7B87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A27189B11DAA1747003C7B87 /* Assets.xcassets */; };
@@ -168,6 +169,8 @@
 		A26AB3961DAC8A6F00D58CBC /* LOLNewsSpecialClassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLNewsSpecialClassView.m; sourceTree = "<group>"; };
 		A26AB3981DACB52C00D58CBC /* LOLNewsNormalClassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLNewsNormalClassView.h; sourceTree = "<group>"; };
 		A26AB3991DACB52C00D58CBC /* LOLNewsNormalClassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLNewsNormalClassView.m; sourceTree = "<group>"; };
+		A26AB39B1DACEA5500D58CBC /* LOLNewsDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLNewsDetailController.h; sourceTree = "<group>"; };
+		A26AB39C1DACEA5500D58CBC /* LOLNewsDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLNewsDetailController.m; sourceTree = "<group>"; };
 		A27189A21DAA1746003C7B87 /* LOL Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LOL Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27189A61DAA1746003C7B87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A27189A81DAA1746003C7B87 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -524,6 +527,8 @@
 				A26AB3961DAC8A6F00D58CBC /* LOLNewsSpecialClassView.m */,
 				A26AB3981DACB52C00D58CBC /* LOLNewsNormalClassView.h */,
 				A26AB3991DACB52C00D58CBC /* LOLNewsNormalClassView.m */,
+				A26AB39B1DACEA5500D58CBC /* LOLNewsDetailController.h */,
+				A26AB39C1DACEA5500D58CBC /* LOLNewsDetailController.m */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -836,6 +841,7 @@
 				A2718A0F1DAA2549003C7B87 /* LOLNewsController.m in Sources */,
 				A26AB3971DAC8A6F00D58CBC /* LOLNewsSpecialClassView.m in Sources */,
 				A2718A221DAA2B34003C7B87 /* ImageScrollView.m in Sources */,
+				A26AB39D1DACEA5500D58CBC /* LOLNewsDetailController.m in Sources */,
 				A22BFE831DAB659600E2585C /* LOLNewsListCell.m in Sources */,
 				A27189A71DAA1746003C7B87 /* main.m in Sources */,
 				A22BFE771DAB322500E2585C /* LOLRequest.m in Sources */,

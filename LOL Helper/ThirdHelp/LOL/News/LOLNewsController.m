@@ -16,6 +16,7 @@
 #import "LOLNewsClassModel.h"
 #import "LOLNewsSpecialClassCell.h"
 #import "LOLNewsNormalClassView.h"
+#import "LOLNewsDetailController.h"
 
 @interface LOLNewsController ()<UITableViewDelegate,UITableViewDataSource,LOLNewsSpecialClassCellDeleagte,LOLNewsNormalClassViewDeleagte>
 
@@ -273,6 +274,23 @@
         return _newsNormalClassView;
     }
     return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2) {
+        //跳转
+        LOLNewsCellModel *newsModel;
+        if (!_isHiddenSpecialClassView) {//需要特殊的class
+            newsModel = [_newsListArray objectAtIndex:indexPath.row-1];
+        }else{
+            newsModel = [_newsListArray objectAtIndex:indexPath.row];
+        }
+
+        LOLNewsDetailController *detailVC = [[LOLNewsDetailController alloc]init];
+        detailVC.url = newsModel.article_url;
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
