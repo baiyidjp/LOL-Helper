@@ -17,5 +17,6 @@
 #define LOL_HTML_BASEURL @"http://qt.qq.com/static/pages/news/phone/"
 //组头分类
 #define LOL_CLASS @"http://qt.qq.com/php_cgi/news/php/varcache_channel.php?plat=ios&version=2"
-
+//收藏
+#define LOL_COLLET @"http://qt.qq.com/php_cgi/news/php/getsavenews.php?next_start_timestamp=0&plat=ios&version=3"
 #endif /* LOL_Request_h */

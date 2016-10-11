@@ -33,6 +33,8 @@
     NSMutableArray *_newsNormalClass;
     NSMutableArray *_newsSpecialClass;
     LOLNewsNormalClassView *_newsNormalClassView;
+    BOOL _isHiddenSpecialClassView;
+    NSString *_defaultClassID;
 }
 - (void)viewDidLoad
 {
@@ -96,6 +98,7 @@
     [LOLRequest getWithUrl:LOL_URL_SCROLLIMAGE params:nil success:^(id responseObject) {
         NSArray *list = [responseObject objectForKey:@"list"];
         _scrollImageArray = [LOLNewsScrollCellModel mj_objectArrayWithKeyValuesArray:list];
+        [_newsTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
         [self requestClass];
     } failure:^(NSError *error) {
         [self.view makeToast:@"requestNewsData请求出错"];
@@ -119,6 +122,10 @@
             }
         }
         _classID = [[_newsNormalClass firstObject] id];
+        _defaultClassID = _classID;
+        _newsNormalClassView.classModels = _newsNormalClass;
+        [_newsTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+        _isHiddenSpecialClassView = !_newsSpecialClass.count;
         [self requestNewsList];
     } failure:^(NSError *error) {
         [self.view makeToast:@"requestClass请求出错"];
@@ -139,7 +146,7 @@
         [_newsListArray removeAllObjects];
         if (list.count) {
             [_newsListArray addObjectsFromArray:[LOLNewsCellModel mj_objectArrayWithKeyValuesArray:list]];
-            [_newsTableView reloadData];
+            [_newsTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
         }
     } failure:^(NSError *error) {
         [self.view makeToast:@"requestNewsList请求出错"];
@@ -155,8 +162,8 @@
     if (section == 0) {
         return 1;
     }
-    NSInteger count = _newsSpecialClass.count;
-    return count ? _newsListArray.count+1 : _newsListArray.count;
+    
+    return _isHiddenSpecialClassView ? _newsListArray.count : _newsListArray.count+1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -169,7 +176,7 @@
     }
     
     LOLNewsCellModel *newsModel;
-    if (_newsSpecialClass.count) {//需要特殊的class
+    if (!_isHiddenSpecialClassView) {//需要特殊的class
         if (indexPath.row == 0) {
             LOLNewsSpecialClassCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LOLNewsSpecialClassCell"];
             cell.classModels = _newsSpecialClass;
@@ -200,7 +207,7 @@
     }
     
     LOLNewsCellModel *newsModel;
-    if (_newsSpecialClass.count) {//需要特殊的class
+    if (!_isHiddenSpecialClassView) {//需要特殊的class
         if (indexPath.row == 0) {
             CGFloat row = (_newsSpecialClass.count-1)/2+1;
             return row*45+KMARGIN;
@@ -227,7 +234,6 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 1) {
-        _newsNormalClassView.classModels = _newsNormalClass;
         _newsNormalClassView.delegate = self;
         return _newsNormalClassView;
     }
@@ -257,7 +263,16 @@
 
 - (void)didSelectNoamalClassBtnWithView:(LOLNewsNormalClassView *)noamalClassView classModel:(LOLNewsClassModel *)classModel
 {
-    NSLog(@"select-- %@",classModel.name);
+    if ([classModel.name isEqualToString:@"收藏"]) {
+        return;
+    }
+    _classID = classModel.id;
+    if ([_defaultClassID isEqualToString:_classID]) {
+        _isHiddenSpecialClassView = NO;
+    }else{
+        _isHiddenSpecialClassView = YES;
+    }
+    [self requestNewsList];
 }
 
 @end

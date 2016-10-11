@@ -80,6 +80,7 @@
             classBtnMaxX = CGRectGetMaxX(classBtn.frame)+midMargin;
             if (i == 0) {
                 _preSelectBtn = classBtn;
+                classBtn.selected = YES;
             }
         }else{
             if (count) {
@@ -92,11 +93,13 @@
                 colletBtn.tag = CLASSBTN_TAG+count;
                 [colletBtn addTarget:self action:@selector(clickClassBtn:) forControlEvents:UIControlEventTouchUpInside];
                 colletBtn.frame = CGRectMake(scrollW - leftMargin - colletW, 15, colletW, 15);
-                [self clickClassBtn:_preSelectBtn];
             }
         }
     }
-    
+    _lineImageView.left = _preSelectBtn.left-KMARGIN*0.5;
+    _lineImageView.width = _preSelectBtn.width+KMARGIN;
+    _lineImageView.top = CGRectGetMaxY(_preSelectBtn.frame)+KMARGIN*0.5;
+    _lineImageView.height = KMARGIN*0.5;
 }
 
 #pragma mark - 点击btn
