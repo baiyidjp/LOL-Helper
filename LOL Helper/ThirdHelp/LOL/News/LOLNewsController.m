@@ -13,8 +13,11 @@
 #import "LOLNewsListCell.h"
 #import "LOLNewsCellModel.h"
 #import "LOLNewsImagesCell.h"
+#import "LOLNewsClassModel.h"
+#import "LOLNewsSpecialClassCell.h"
+#import "LOLNewsNormalClassView.h"
 
-@interface LOLNewsController ()<UITableViewDelegate,UITableViewDataSource>
+@interface LOLNewsController ()<UITableViewDelegate,UITableViewDataSource,LOLNewsSpecialClassCellDeleagte,LOLNewsNormalClassViewDeleagte>
 
 @end
 
@@ -26,6 +29,10 @@
     UITableView *_newsTableView;
     NSArray *_scrollImageArray;
     NSMutableArray *_newsListArray;
+    NSString *_classID;
+    NSMutableArray *_newsNormalClass;
+    NSMutableArray *_newsSpecialClass;
+    LOLNewsNormalClassView *_newsNormalClassView;
 }
 - (void)viewDidLoad
 {
@@ -40,6 +47,8 @@
     }
     
     _newsListArray = [NSMutableArray array];
+    _newsNormalClass = [NSMutableArray array];
+    _newsSpecialClass = [NSMutableArray array];
     
     [self configViews];
     [self requestNewsData];
@@ -75,7 +84,10 @@
     [_newsTableView registerClass:[LOLNewsScrollCell class] forCellReuseIdentifier:@"LOLNewsScrollCell"];
     [_newsTableView registerClass:[LOLNewsListCell class] forCellReuseIdentifier:@"LOLNewsListCell"];
     [_newsTableView registerClass:[LOLNewsImagesCell class] forCellReuseIdentifier:@"LOLNewsImagesCell"];
+    [_newsTableView registerClass:[LOLNewsSpecialClassCell class] forCellReuseIdentifier:@"LOLNewsSpecialClassCell"];
     [self.view addSubview:_newsTableView];
+    
+    _newsNormalClassView = [[LOLNewsNormalClassView alloc]initWithFrame:CGRectMake(0, 0, KWIDTH, 44)];
 }
 
 #pragma mark - request
@@ -84,18 +96,45 @@
     [LOLRequest getWithUrl:LOL_URL_SCROLLIMAGE params:nil success:^(id responseObject) {
         NSArray *list = [responseObject objectForKey:@"list"];
         _scrollImageArray = [LOLNewsScrollCellModel mj_objectArrayWithKeyValuesArray:list];
-        [self requestNewsList];
+        [self requestClass];
     } failure:^(NSError *error) {
-        [self.view makeToast:@"请求出错"];
+        [self.view makeToast:@"requestNewsData请求出错"];
     }];
     
+}
+
+#pragma mark - class_list
+- (void)requestClass{
+    
+    [LOLRequest getWithUrl:LOL_CLASS params:nil success:^(id responseObject) {
+        NSArray *classModels = [LOLNewsClassModel mj_objectArrayWithKeyValuesArray:responseObject];
+        [_newsNormalClass removeAllObjects];
+        [_newsSpecialClass removeAllObjects];
+        for (LOLNewsClassModel *classModel in classModels) {
+            BOOL is_entry = [classModel.is_entry boolValue];
+            if (is_entry) {
+                [_newsSpecialClass addObject:classModel];
+            }else{
+                [_newsNormalClass addObject:classModel];
+            }
+        }
+        _classID = [[_newsNormalClass firstObject] id];
+        [self requestNewsList];
+    } failure:^(NSError *error) {
+        [self.view makeToast:@"requestClass请求出错"];
+    }];
 }
 
 #pragma mark - news_list
 - (void)requestNewsList{
     
-    [LOLRequest getWithUrl:LOL_URL_NEWSLIST params:nil success:^(id responseObject) {
-        NSLog(@"newslist -- %@",responseObject);
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:_classID forKey:@"id"];
+    [params setObject:@0 forKey:@"page"];
+    [params setObject:@"ios" forKey:@"plat"];
+    [params setObject:@33 forKey:@"version"];
+    
+    [LOLRequest getWithUrl:LOL_URL_NEWSLIST params:params success:^(id responseObject) {
         NSArray *list = [responseObject objectForKey:@"list"];
         [_newsListArray removeAllObjects];
         if (list.count) {
@@ -103,7 +142,7 @@
             [_newsTableView reloadData];
         }
     } failure:^(NSError *error) {
-        [self.view makeToast:@"请求出错"];
+        [self.view makeToast:@"requestNewsList请求出错"];
     }];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -116,7 +155,8 @@
     if (section == 0) {
         return 1;
     }
-    return _newsListArray.count;
+    NSInteger count = _newsSpecialClass.count;
+    return count ? _newsListArray.count+1 : _newsListArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -124,16 +164,32 @@
     if (indexPath.section == 0) {
         LOLNewsScrollCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LOLNewsScrollCell"];
         cell.imageUrlArray = _scrollImageArray;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
-    LOLNewsCellModel *newsModel = [_newsListArray objectAtIndex:indexPath.row];
+    
+    LOLNewsCellModel *newsModel;
+    if (_newsSpecialClass.count) {//需要特殊的class
+        if (indexPath.row == 0) {
+            LOLNewsSpecialClassCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LOLNewsSpecialClassCell"];
+            cell.classModels = _newsSpecialClass;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
+            return cell;
+        }
+        newsModel = [_newsListArray objectAtIndex:indexPath.row-1];
+    }else{
+        newsModel = [_newsListArray objectAtIndex:indexPath.row];
+    }
     if ([newsModel.newstype isEqualToString:@"图集"]) {
         LOLNewsImagesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LOLNewsImagesCell"];
         cell.newsModel = newsModel;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     LOLNewsListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LOLNewsListCell"];
     cell.newsModel = newsModel;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -142,7 +198,17 @@
     if (indexPath.section == 0) {
         return KWIDTH*IMAGE_SCALE;
     }
-    LOLNewsCellModel *newsModel = [_newsListArray objectAtIndex:indexPath.row];
+    
+    LOLNewsCellModel *newsModel;
+    if (_newsSpecialClass.count) {//需要特殊的class
+        if (indexPath.row == 0) {
+            CGFloat row = (_newsSpecialClass.count-1)/2+1;
+            return row*45+KMARGIN;
+        }
+        newsModel = [_newsListArray objectAtIndex:indexPath.row-1];
+    }else{
+        newsModel = [_newsListArray objectAtIndex:indexPath.row];
+    }
     if ([newsModel.newstype isEqualToString:@"图集"]) {
         return 210;
     }
@@ -158,6 +224,16 @@
     return 0;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 1) {
+        _newsNormalClassView.classModels = _newsNormalClass;
+        _newsNormalClassView.delegate = self;
+        return _newsNormalClassView;
+    }
+    return nil;
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat offsetY = scrollView.contentOffset.y;
@@ -171,6 +247,17 @@
         self.navigationItem.title = @"";
         _newsTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     }
+}
+
+#pragma mark 代理
+- (void)didSelectSpecialClassBtnWithView:(LOLNewsSpecialClassCell *)specialClassView classModel:(LOLNewsClassModel *)classModel
+{
+    NSLog(@"select-- %@",classModel.name);
+}
+
+- (void)didSelectNoamalClassBtnWithView:(LOLNewsNormalClassView *)noamalClassView classModel:(LOLNewsClassModel *)classModel
+{
+    NSLog(@"select-- %@",classModel.name);
 }
 
 @end

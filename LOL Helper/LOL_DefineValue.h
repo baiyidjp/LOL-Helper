@@ -22,7 +22,7 @@
 #define LOL_NotificationCenter [NSNotificationCenter defaultCenter]
 //高效打印
 #ifdef DEBUG
-#define NSLog(...) NSLog(@"%s 第%d行 \n %@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
+#define NSLog(...) NSLog(@"%s 第%d行  %@\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
 #else
 #define NSLog(...)
 #endif

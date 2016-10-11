@@ -65,7 +65,7 @@
     _countLabel.font = FONTSIZE(11);
     _countLabel.textAlignment = NSTextAlignmentCenter;
     _countLabel.backgroundColor = [UIColor blackColor];
-    _countLabel.alpha = 0.8;
+    _countLabel.alpha = 0.6;
     [_countImageView addSubview:_countLabel];
     
     _newsTitleLable = [[UILabel alloc]init];
