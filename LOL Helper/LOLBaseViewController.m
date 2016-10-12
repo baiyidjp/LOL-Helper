@@ -15,7 +15,7 @@
 @implementation LOLBaseViewController
 
 /**
- *  修改状态栏字体颜色成白色
+ *  修改状态栏字体颜色成白色 
  */
 - (UIStatusBarStyle)preferredStatusBarStyle
 {

@@ -34,6 +34,7 @@
     NSMutableArray *_newsNormalClass;
     NSMutableArray *_newsSpecialClass;
     LOLNewsNormalClassView *_newsNormalClassView;
+    LOLNewsNormalClassView *_newsNormalClassViewHead;
     BOOL _isHiddenSpecialClassView;
     NSString *_defaultClassID;
 }
@@ -91,7 +92,11 @@
     [_newsTableView registerClass:[LOLNewsSpecialClassCell class] forCellReuseIdentifier:@"LOLNewsSpecialClassCell"];
     [self.view addSubview:_newsTableView];
     
-    _newsNormalClassView = [[LOLNewsNormalClassView alloc]initWithFrame:CGRectMake(0, 0, KWIDTH, 44)];
+    _newsNormalClassView = [[LOLNewsNormalClassView alloc]initWithFrame:CGRectMake(0,KNAVHEIGHT, KWIDTH, 44)];
+    _newsNormalClassView.hidden = YES;
+    [self.view addSubview:_newsNormalClassView];
+    
+    _newsNormalClassViewHead = [[LOLNewsNormalClassView alloc]initWithFrame:CGRectMake(0, 0, KWIDTH, 44)];
 }
 
 #pragma mark - refresh
@@ -175,6 +180,7 @@
         if (list.count) {
             [_newsListArray addObjectsFromArray:[LOLNewsCellModel mj_objectArrayWithKeyValuesArray:list]];
             [_newsTableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+
         }
         [_newsTableView.mj_header endRefreshing];
     } failure:^(NSError *error) {
@@ -271,7 +277,10 @@
         _newsNormalClassView.classID = _classID.length ? _classID : _defaultClassID;
         _newsNormalClassView.classModels = _newsNormalClass;
         _newsNormalClassView.delegate = self;
-        return _newsNormalClassView;
+        _newsNormalClassViewHead.classID = _newsNormalClassView.classID;
+        _newsNormalClassViewHead.classModels = _newsNormalClass;
+        _newsNormalClassViewHead.delegate = self;
+        return _newsNormalClassViewHead;
     }
     return nil;
 }
@@ -301,10 +310,12 @@
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1.0];
         self.navigationItem.title = @"董江鹏";
         _newsTableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        _newsNormalClassView.hidden = NO;
     }else{
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0.0];
         self.navigationItem.title = @"";
         _newsTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _newsNormalClassView.hidden = YES;
     }
 }
 
