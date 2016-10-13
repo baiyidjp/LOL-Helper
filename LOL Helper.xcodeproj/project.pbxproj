@@ -43,6 +43,8 @@
 		A22BFEBF1DAB840100E2585C /* personal_refresh_loading28@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A22BFEA41DAB840100E2585C /* personal_refresh_loading28@2x.png */; };
 		A22BFEC21DAB95A800E2585C /* LOLReportView.m in Sources */ = {isa = PBXBuildFile; fileRef = A22BFEC11DAB95A800E2585C /* LOLReportView.m */; };
 		A22BFEC51DAB95C200E2585C /* LOLNewsImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A22BFEC41DAB95C200E2585C /* LOLNewsImagesCell.m */; };
+		A24B1EB31DAF281F00F7F5C9 /* nav_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A24B1EB21DAF281F00F7F5C9 /* nav_head@2x.png */; };
+		A24B1EB51DAF285F00F7F5C9 /* nav_head@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A24B1EB41DAF285F00F7F5C9 /* nav_head@3x.png */; };
 		A26AB3911DAC79D500D58CBC /* LOLNewsClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A26AB3901DAC79D500D58CBC /* LOLNewsClassModel.m */; };
 		A26AB3941DAC88F600D58CBC /* LOLNewsSpecialClassCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A26AB3931DAC88F600D58CBC /* LOLNewsSpecialClassCell.m */; };
 		A26AB3971DAC8A6F00D58CBC /* LOLNewsSpecialClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = A26AB3961DAC8A6F00D58CBC /* LOLNewsSpecialClassView.m */; };
@@ -161,6 +163,8 @@
 		A22BFEC11DAB95A800E2585C /* LOLReportView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLReportView.m; sourceTree = "<group>"; };
 		A22BFEC31DAB95C200E2585C /* LOLNewsImagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLNewsImagesCell.h; sourceTree = "<group>"; };
 		A22BFEC41DAB95C200E2585C /* LOLNewsImagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLNewsImagesCell.m; sourceTree = "<group>"; };
+		A24B1EB21DAF281F00F7F5C9 /* nav_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_head@2x.png"; sourceTree = "<group>"; };
+		A24B1EB41DAF285F00F7F5C9 /* nav_head@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_head@3x.png"; sourceTree = "<group>"; };
 		A26AB38F1DAC79D500D58CBC /* LOLNewsClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLNewsClassModel.h; sourceTree = "<group>"; };
 		A26AB3901DAC79D500D58CBC /* LOLNewsClassModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLNewsClassModel.m; sourceTree = "<group>"; };
 		A26AB3921DAC88F600D58CBC /* LOLNewsSpecialClassCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLNewsSpecialClassCell.h; sourceTree = "<group>"; };
@@ -547,6 +551,8 @@
 		A2718A241DAA317F003C7B87 /* Nav */ = {
 			isa = PBXGroup;
 			children = (
+				A24B1EB21DAF281F00F7F5C9 /* nav_head@2x.png */,
+				A24B1EB41DAF285F00F7F5C9 /* nav_head@3x.png */,
 				A2718A251DAA317F003C7B87 /* competition_centre_nav_right_data_normal@2x.png */,
 				A2718A261DAA317F003C7B87 /* competition_centre_nav_right_data_press@2x.png */,
 				A2718A271DAA317F003C7B87 /* competition_centre_nav_right_subscribe_normal@2x.png */,
@@ -704,6 +710,7 @@
 				A22BFEB71DAB840100E2585C /* personal_segment_selected_mark@2x.png in Resources */,
 				A27189E61DAA1766003C7B87 /* tab_icon_news_normal@2x.png in Resources */,
 				A2718A481DAA317F003C7B87 /* personal_guset_right_nav_mark_press@2x.png in Resources */,
+				A24B1EB31DAF281F00F7F5C9 /* nav_head@2x.png in Resources */,
 				A22BFEBD1DAB840100E2585C /* personal_refresh_loading26@2x.png in Resources */,
 				A22BFEAC1DAB840100E2585C /* list_news_tab_hot_mark@2x.png in Resources */,
 				A22BFEB51DAB840100E2585C /* news_search@2x.png in Resources */,
@@ -712,6 +719,7 @@
 				A2718A3F1DAA317F003C7B87 /* nav_btn_back_tiny_normal@2x.png in Resources */,
 				A22BFEB11DAB840100E2585C /* list_news_top_arrow_normal@2x.png in Resources */,
 				A2718A3C1DAA317F003C7B87 /* nav_bar_bg_for_six@2x.png in Resources */,
+				A24B1EB51DAF285F00F7F5C9 /* nav_head@3x.png in Resources */,
 				A22BFEAE1DAB840100E2585C /* list_news_tab_image_select@2x.png in Resources */,
 				A27189E91DAA1766003C7B87 /* tab_icon_quiz_press@2x.png in Resources */,
 				A22BFEB21DAB840100E2585C /* list_news_top_arrow_press@2x.png in Resources */,

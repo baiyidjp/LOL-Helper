@@ -95,6 +95,8 @@
         viewH = self.frame.size.height;
         [self creatScrollView];
         
+        _imageUpdateUrls = imageUrls;
+        
         [self.imageUrls removeAllObjects];
         if (imageUrls.count) {
             for (LOLNewsScrollCellModel *model in imageUrls) {
@@ -115,6 +117,7 @@
 - (void)setImageUpdateUrls:(NSArray *)imageUpdateUrls{
     
     _imageUpdateUrls = imageUpdateUrls;
+    
     [self.imageUrls removeAllObjects];
     if (imageUpdateUrls.count) {
         for (LOLNewsScrollCellModel *model in imageUpdateUrls) {
@@ -178,9 +181,9 @@
     [currentImageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrls[0]] placeholderImage:[UIImage imageNamed:self.placeholderImageName]];
     [self.scrollView addSubview:currentImageView];
     
-//    UIButton *clickBtn = [[UIButton alloc]initWithFrame:currentImageView.frame];
-//    [clickBtn addTarget:self action:@selector(clickImage) forControlEvents:UIControlEventTouchUpInside];
-//    [self.scrollView addSubview:clickBtn];
+    UIButton *clickBtn = [[UIButton alloc]initWithFrame:currentImageView.frame];
+    [clickBtn addTarget:self action:@selector(clickImage) forControlEvents:UIControlEventTouchUpInside];
+    [self.scrollView addSubview:clickBtn];
 
     
 }
@@ -262,6 +265,14 @@
     }
     
     self.pageControl.currentPage = self.index;
+}
+
+#pragma mark - clickImage
+- (void)clickImage{
+    
+    if ([self.delegate respondsToSelector:@selector(didSelectImageView:Model:)]) {
+        [self.delegate didSelectImageView:self Model:[_imageUpdateUrls objectAtIndex:self.index]];
+    }
 }
 
 @end

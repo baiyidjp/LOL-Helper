@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageScrollView.h"
 
 @interface LOLNewsScrollCell : UITableViewCell
 
 /** 集合 */
 @property(nonatomic,strong)NSArray *imageUrlArray;
+
+/** imageView */
+@property(nonatomic,strong)ImageScrollView *scrollView;;
 
 @end

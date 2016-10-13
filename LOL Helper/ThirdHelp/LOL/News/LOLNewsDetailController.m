@@ -28,12 +28,12 @@
     [LOLRequest cancelAllOperations];
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.title = @"资讯详情";
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1.0];
     
     [self configMenuItem];
     [self configViews];

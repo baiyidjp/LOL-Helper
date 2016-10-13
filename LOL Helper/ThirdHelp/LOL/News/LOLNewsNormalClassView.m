@@ -15,12 +15,15 @@
     UIScrollView *_classScrollView;
     UIImageView *_lineImageView;
     UIButton *_preSelectBtn;
+    NSMutableArray *_buttonArray;
+    NSInteger _currentType;
 }
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame withType:(NSInteger)type
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.frame = frame;
+        _currentType = type;
         [self configViews];
     }
     return self;
@@ -29,6 +32,8 @@
 #pragma mark - 配置Views
 - (void)configViews
 {
+    _buttonArray = [NSMutableArray array];
+    
     _classScrollView = [[UIScrollView alloc]initWithFrame:self.bounds];
     _classScrollView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
     _classScrollView.delegate = self;
@@ -67,6 +72,7 @@
     _classScrollView.contentSize = CGSizeMake(scrollW, 0);
     
     [_classScrollView removeAllSubViews];
+    [_buttonArray removeAllObjects];
     [_classScrollView addSubview:_lineImageView];
     CGFloat classBtnMaxX = leftMargin;
     for (NSInteger i = 0; i < count+1; i++) {
@@ -85,6 +91,7 @@
             CGFloat btnX = classBtnMaxX;
             classBtn.frame = CGRectMake(btnX, 15, btnW, 15);
             classBtnMaxX = CGRectGetMaxX(classBtn.frame)+midMargin;
+            [_buttonArray addObject:classBtn];
             if ([model.id isEqualToString:self.classID]) {
                 _preSelectBtn = classBtn;
                 classBtn.selected = YES;
@@ -100,6 +107,7 @@
                 colletBtn.tag = CLASSBTN_TAG+count;
                 [colletBtn addTarget:self action:@selector(clickClassBtn:) forControlEvents:UIControlEventTouchUpInside];
                 colletBtn.frame = CGRectMake(scrollW - leftMargin - colletW, 15, colletW, 15);
+                [_buttonArray addObject:colletBtn];
             }
         }
     }
@@ -136,8 +144,8 @@
         classModel = [[LOLNewsClassModel alloc]init];
         classModel.name = @"收藏";
     }
-    if ([self.delegate respondsToSelector:@selector(didSelectNoamalClassBtnWithView:classModel:)]) {
-        [self.delegate didSelectNoamalClassBtnWithView:self classModel:classModel];
+    if ([self.delegate respondsToSelector:@selector(didSelectNoamalClassBtnWithView:classModel:index:type:)]) {
+        [self.delegate didSelectNoamalClassBtnWithView:self classModel:classModel index:btnTag type:_currentType];
     }
 }
 
@@ -155,6 +163,25 @@
         [_classScrollView setContentOffset:CGPointMake(0, 0) animated:true];
         
     }
+}
+
+- (void)scrollToItemIndex:(NSInteger)index
+{
+    UIButton *classBtn = [_buttonArray objectAtIndex:index];
+    if ([classBtn isEqual:_preSelectBtn]) {
+        classBtn.selected = YES;
+    }else{
+        classBtn.selected = YES;
+        _preSelectBtn.selected = NO;
+    }
+    [UIView animateWithDuration:0.1 animations:^{
+        _lineImageView.left = classBtn.left-KMARGIN*0.5;
+        _lineImageView.width = classBtn.width+KMARGIN;
+        _lineImageView.top = CGRectGetMaxY(classBtn.frame)+KMARGIN*0.5;
+        _lineImageView.height = KMARGIN*0.5;
+        [self scrollPageBar:classBtn];
+    }];
+    _preSelectBtn = classBtn;
 }
 
 @end

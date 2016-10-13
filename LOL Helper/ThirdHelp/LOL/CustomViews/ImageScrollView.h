@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class LOLNewsScrollCellModel,ImageScrollView;
+@protocol ImageScrollViewDelegate <NSObject>
+
+- (void)didSelectImageView:(ImageScrollView *)imageView Model:(LOLNewsScrollCellModel *)model;
+
+@end
+
 @interface ImageScrollView : UIView
 
 /**
@@ -51,5 +58,7 @@
  *  图片的路经集合 更新图片Urls使用
  */
 @property(nonatomic,strong)NSArray *imageUpdateUrls;
+
+@property(nonatomic,weak)id<ImageScrollViewDelegate> delegate;
 
 @end

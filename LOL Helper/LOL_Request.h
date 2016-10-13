@@ -19,4 +19,6 @@
 #define LOL_CLASS @"http://qt.qq.com/php_cgi/news/php/varcache_channel.php?plat=ios&version=2"
 //收藏
 #define LOL_COLLET @"http://qt.qq.com/php_cgi/news/php/getsavenews.php?next_start_timestamp=0&plat=ios&version=3"
+//拼接轮播URL
+#define LOL_SCROLLURL(x)  @"http://qt.qq.com/static/pages/news/phone/x?APP_BROWSER_VERSION_CODE=1&ios_version=1005&imgmode=auto"
 #endif /* LOL_Request_h */

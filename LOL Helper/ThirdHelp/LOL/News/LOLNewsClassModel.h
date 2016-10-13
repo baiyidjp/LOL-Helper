@@ -12,6 +12,7 @@
 
 @property(nonatomic,copy)NSString *id;
 @property(nonatomic,copy)NSString *name;
+@property(nonatomic,copy)NSString *url;
 @property(nonatomic,copy)NSString *is_entry;
 @property(nonatomic,copy)NSString *subtitle;
 @property(nonatomic,copy)NSString *img;

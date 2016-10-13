@@ -12,6 +12,7 @@
 
 @property(nonatomic,copy)NSString *image_url_big;
 @property(nonatomic,copy)NSString *article_url;
+@property(nonatomic,copy)NSString *title;
 
 /*
  "channel_id": "&lt;2&gt;:&lt;13&gt;,&lt;2&gt;:&lt;169&gt;,&lt;2&gt;:&lt;229&gt;",

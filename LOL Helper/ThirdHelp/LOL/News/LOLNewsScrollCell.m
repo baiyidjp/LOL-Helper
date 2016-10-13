@@ -7,12 +7,10 @@
 //
 
 #import "LOLNewsScrollCell.h"
-#import "ImageScrollView.h"
+
 
 @implementation LOLNewsScrollCell
-{
-    ImageScrollView *_scrollView;
-}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -25,14 +23,14 @@
 #pragma mark - 配置View
 - (void)configViews
 {
-    _scrollView = [ImageScrollView returnImageScrollViewWithFrame:CGRectMake(0, 0, KWIDTH, KWIDTH*IMAGE_SCALE) imageUrl:nil];
+    self.scrollView = [ImageScrollView returnImageScrollViewWithFrame:CGRectMake(0, 0, KWIDTH, KWIDTH*IMAGE_SCALE) imageUrl:nil];
     [self.contentView addSubview:_scrollView];
 }
 
 - (void)setImageUrlArray:(NSArray *)imageUrlArray
 {
     _imageUrlArray = imageUrlArray;
-    _scrollView.imageUpdateUrls = imageUrlArray;
+    self.scrollView.imageUpdateUrls = imageUrlArray;
 }
 
 @end

@@ -18,7 +18,7 @@
 #import "LOLNewsNormalClassView.h"
 #import "LOLNewsDetailController.h"
 
-@interface LOLNewsController ()<UITableViewDelegate,UITableViewDataSource,LOLNewsSpecialClassCellDeleagte,LOLNewsNormalClassViewDeleagte>
+@interface LOLNewsController ()<UITableViewDelegate,UITableViewDataSource,LOLNewsSpecialClassCellDeleagte,LOLNewsNormalClassViewDeleagte,ImageScrollViewDelegate>
 
 @end
 
@@ -38,14 +38,27 @@
     BOOL _isHiddenSpecialClassView;
     NSString *_defaultClassID;
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0.0];
+    self.navigationItem.title = @"";
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1.0];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0.0];
-    self.navigationItem.title = @"";
-    
+   
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
@@ -63,11 +76,11 @@
 - (void)configViews
 {
     _headIconBtn = [[UIButton alloc]init];
+    [_headIconBtn setImage:[UIImage imageNamed:@"nav_head"] forState:UIControlStateNormal];
     _headIconBtn.layer.cornerRadius = 20;
     _headIconBtn.layer.borderWidth = 2;
     _headIconBtn.layer.borderColor = DefaultGodColor.CGColor;
     _headIconBtn.frame = CGRectMake(2*KMARGIN, 2*KMARGIN+2, 40, 40);
-    [_headIconBtn setTitle:@"头像" forState:UIControlStateNormal];
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc]initWithCustomView:_headIconBtn];
     self.navigationItem.leftBarButtonItem = leftItem;
     
@@ -92,11 +105,11 @@
     [_newsTableView registerClass:[LOLNewsSpecialClassCell class] forCellReuseIdentifier:@"LOLNewsSpecialClassCell"];
     [self.view addSubview:_newsTableView];
     
-    _newsNormalClassView = [[LOLNewsNormalClassView alloc]initWithFrame:CGRectMake(0,KNAVHEIGHT, KWIDTH, 44)];
+    _newsNormalClassView = [[LOLNewsNormalClassView alloc]initWithFrame:CGRectMake(0,KNAVHEIGHT, KWIDTH, 44) withType:1];
     _newsNormalClassView.hidden = YES;
     [self.view addSubview:_newsNormalClassView];
     
-    _newsNormalClassViewHead = [[LOLNewsNormalClassView alloc]initWithFrame:CGRectMake(0, 0, KWIDTH, 44)];
+    _newsNormalClassViewHead = [[LOLNewsNormalClassView alloc]initWithFrame:CGRectMake(0, 0, KWIDTH, 44) withType:2];
 }
 
 #pragma mark - refresh
@@ -210,6 +223,7 @@
 {
     if (indexPath.section == 0) {
         LOLNewsScrollCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LOLNewsScrollCell"];
+        cell.scrollView.delegate = self;
         cell.imageUrlArray = _scrollImageArray;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -306,7 +320,7 @@
 {
     CGFloat offsetY = scrollView.contentOffset.y;
 #pragma mark 隐藏导航栏
-    if (offsetY > KWIDTH*IMAGE_SCALE - KNAVHEIGHT) {
+    if (offsetY >= KWIDTH*IMAGE_SCALE - KNAVHEIGHT) {
         [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1.0];
         self.navigationItem.title = @"董江鹏";
         _newsTableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
@@ -323,9 +337,15 @@
 - (void)didSelectSpecialClassBtnWithView:(LOLNewsSpecialClassCell *)specialClassView classModel:(LOLNewsClassModel *)classModel
 {
     NSLog(@"select-- %@",classModel.name);
+    if (classModel.url.length) {
+        LOLNewsDetailController *detailVC = [[LOLNewsDetailController alloc]init];
+        detailVC.url = classModel.url;
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }else{
+    }
 }
 
-- (void)didSelectNoamalClassBtnWithView:(LOLNewsNormalClassView *)noamalClassView classModel:(LOLNewsClassModel *)classModel
+- (void)didSelectNoamalClassBtnWithView:(LOLNewsNormalClassView *)noamalClassView classModel:(LOLNewsClassModel *)classModel index:(NSInteger)index type:(NSInteger)type
 {
     if ([classModel.name isEqualToString:@"收藏"]) {
         return;
@@ -336,7 +356,27 @@
     }else{
         _isHiddenSpecialClassView = YES;
     }
+    
+    if (type == 1) {
+        [_newsNormalClassViewHead scrollToItemIndex:index];
+        _newsTableView.contentOffset = CGPointMake(0, KWIDTH*IMAGE_SCALE - KNAVHEIGHT);
+    }else{
+        [_newsNormalClassView scrollToItemIndex:index];
+    }
+    
     [self requestNewsList];
+}
+
+- (void)didSelectImageView:(ImageScrollView *)imageView Model:(LOLNewsScrollCellModel *)model
+{
+    LOLNewsDetailController *detailVC = [[LOLNewsDetailController alloc]init];
+    if ([model.article_url hasPrefix:@"http"]) {
+        detailVC.url = model.article_url;
+    }else{
+        detailVC.url = [NSString stringWithFormat:@"http://qt.qq.com/static/pages/news/phone/%@?APP_BROWSER_VERSION_CODE=1&ios_version=1005&imgmode=auto",model.article_url];
+    }
+    [self.navigationController pushViewController:detailVC animated:YES];
+
 }
 
 @end
