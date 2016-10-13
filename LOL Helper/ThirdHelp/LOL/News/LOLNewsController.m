@@ -42,8 +42,19 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0.0];
-    self.navigationItem.title = @"";
+    
+    CGFloat offsetY = _newsTableView.contentOffset.y;
+    if (offsetY >= KWIDTH*IMAGE_SCALE - KNAVHEIGHT) {
+        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1.0];
+        self.navigationItem.title = @"董江鹏";
+        _newsTableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        _newsNormalClassView.hidden = NO;
+    }else{
+        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0.0];
+        self.navigationItem.title = @"";
+        _newsTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _newsNormalClassView.hidden = YES;
+    }
     
 }
 
