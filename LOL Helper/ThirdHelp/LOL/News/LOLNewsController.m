@@ -18,7 +18,7 @@
 #import "LOLNewsNormalClassView.h"
 #import "LOLNewsDetailController.h"
 
-@interface LOLNewsController ()<UITableViewDelegate,UITableViewDataSource,LOLNewsSpecialClassCellDeleagte,LOLNewsNormalClassViewDeleagte,ImageScrollViewDelegate>
+@interface LOLNewsController ()<UITableViewDelegate,UITableViewDataSource,LOLNewsSpecialClassCellDeleagte,LOLNewsNormalClassViewDeleagte,LOLNewsScrollCellDelegate>
 
 @end
 
@@ -234,7 +234,7 @@
 {
     if (indexPath.section == 0) {
         LOLNewsScrollCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LOLNewsScrollCell"];
-        cell.scrollView.delegate = self;
+        cell.delegate = self;
         cell.imageUrlArray = _scrollImageArray;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -378,9 +378,19 @@
     [self requestNewsList];
 }
 
-- (void)didSelectImageView:(ImageScrollView *)imageView Model:(LOLNewsScrollCellModel *)model
+- (void)didScrollNoamalClassBtnWithView:(LOLNewsNormalClassView *)noamalClassView contentOffset:(CGPoint)offset type:(NSInteger)type{
+    
+    if (type == 1) {
+        [_newsNormalClassViewHead scrollViewWithOffset:offset];
+    }else{
+        [_newsNormalClassView scrollViewWithOffset:offset];
+    }
+}
+
+- (void)didSelectItem:(LOLNewsScrollCell *)LOLNewsScrollCell index:(NSInteger)index
 {
     LOLNewsDetailController *detailVC = [[LOLNewsDetailController alloc]init];
+    LOLNewsScrollCellModel *model = _scrollImageArray[index];
     if ([model.article_url hasPrefix:@"http"]) {
         detailVC.url = model.article_url;
     }else{

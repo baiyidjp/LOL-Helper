@@ -11,7 +11,7 @@
 
 #define PLACEHOLDER_NAME @"D_200-200"
 #define ISAUTOSCROLL YES
-#define SCROLLTIME 2.0
+#define SCROLLTIME 5.0
 
 @interface ImageScrollView ()<UIScrollViewDelegate>
 

@@ -184,4 +184,16 @@
     _preSelectBtn = classBtn;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+//    if ([self.delegate respondsToSelector:@selector(didScrollNoamalClassBtnWithView:contentOffset:type:)]) {
+//        [self.delegate didScrollNoamalClassBtnWithView:self contentOffset:scrollView.contentOffset type:_currentType];
+//    }
+}
+
+- (void)scrollViewWithOffset:(CGPoint)offset{
+    
+//    [_classScrollView setContentOffset:offset];
+}
+
 @end

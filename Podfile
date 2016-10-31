@@ -9,6 +9,7 @@ pod 'MJRefresh'
 pod 'MJExtension'
 pod ‘SDWebImage’
 pod ‘Masonry’
+pod 'FMDB'
 end
 
 target 'LOL HelperTests' do

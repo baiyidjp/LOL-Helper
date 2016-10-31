@@ -9,12 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "ImageScrollView.h"
 
+@class LOLNewsScrollCell;
+@protocol LOLNewsScrollCellDelegate <NSObject>
+
+- (void)didSelectItem:(LOLNewsScrollCell *)LOLNewsScrollCell index:(NSInteger)index;
+
+@end
+
 @interface LOLNewsScrollCell : UITableViewCell
 
 /** 集合 */
 @property(nonatomic,strong)NSArray *imageUrlArray;
 
-/** imageView */
-@property(nonatomic,strong)ImageScrollView *scrollView;;
+@property(nonatomic,weak)id<LOLNewsScrollCellDelegate> delegate;
 
 @end

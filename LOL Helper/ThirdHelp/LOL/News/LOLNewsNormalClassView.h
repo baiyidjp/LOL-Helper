@@ -13,6 +13,8 @@
 
 - (void)didSelectNoamalClassBtnWithView:(LOLNewsNormalClassView *)noamalClassView classModel:(LOLNewsClassModel *)classModel index:(NSInteger)index type:(NSInteger)type;
 
+- (void)didScrollNoamalClassBtnWithView:(LOLNewsNormalClassView *)noamalClassView contentOffset:(CGPoint)offset type:(NSInteger)type;
+
 @end
 
 @interface LOLNewsNormalClassView : UIView<UIScrollViewDelegate>
@@ -27,5 +29,7 @@
 - (instancetype)initWithFrame:(CGRect)frame withType:(NSInteger)type; //1代表固定的 2代表header
 
 - (void)scrollToItemIndex:(NSInteger)index;
+
+- (void)scrollViewWithOffset:(CGPoint)offset;
 
 @end

@@ -62,13 +62,7 @@
             [tabbarbuttonArray addObject:tabBarButton];
         }
     }
-//    CABasicAnimation *shakeAnimation = [CABasicAnimation animationWithKeyPath:@"transform.translation.y"];
-//    shakeAnimation.duration = 0.25f;
-//    shakeAnimation.fromValue = [NSNumber numberWithFloat:-5];
-//    shakeAnimation.toValue = [NSNumber numberWithFloat:5];
-//    shakeAnimation.autoreverses = YES;
-//    [[tabbarbuttonArray[index] layer] addAnimation:shakeAnimation forKey:nil];
-    
+
     CABasicAnimation*pulse = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     pulse.timingFunction= [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     pulse.duration = 0.08;

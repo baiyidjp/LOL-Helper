@@ -47,8 +47,13 @@
         [backBtn setImage:backImage forState:UIControlStateNormal];
         [backBtn addTarget:self action:@selector(backBtnPressed) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *colseItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-        viewController.navigationItem.leftBarButtonItem = colseItem;
         
+        UIBarButtonItem * spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        //将宽度设为负值
+        spaceItem.width = -10;
+    
+        viewController.navigationItem.leftBarButtonItems = @[spaceItem,colseItem];
+    
         
 ////    setp1:需要获取系统自带滑动手势的target对象
 //        id target = self.navigationController.interactivePopGestureRecognizer.delegate;

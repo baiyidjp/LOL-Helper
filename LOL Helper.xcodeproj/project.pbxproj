@@ -43,6 +43,11 @@
 		A22BFEBF1DAB840100E2585C /* personal_refresh_loading28@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A22BFEA41DAB840100E2585C /* personal_refresh_loading28@2x.png */; };
 		A22BFEC21DAB95A800E2585C /* LOLReportView.m in Sources */ = {isa = PBXBuildFile; fileRef = A22BFEC11DAB95A800E2585C /* LOLReportView.m */; };
 		A22BFEC51DAB95C200E2585C /* LOLNewsImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A22BFEC41DAB95C200E2585C /* LOLNewsImagesCell.m */; };
+		A23C0F301DC2F97B00885612 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A23C0F2F1DC2F97B00885612 /* libsqlite3.0.tbd */; };
+		A2434CB71DC73C7600C64AA5 /* JPLoopView.m in Sources */ = {isa = PBXBuildFile; fileRef = A2434CB01DC73C7600C64AA5 /* JPLoopView.m */; };
+		A2434CB81DC73C7600C64AA5 /* JPLoopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2434CB21DC73C7600C64AA5 /* JPLoopViewCell.m */; };
+		A2434CB91DC73C7600C64AA5 /* JPLoopViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A2434CB41DC73C7600C64AA5 /* JPLoopViewLayout.m */; };
+		A2434CBA1DC73C7600C64AA5 /* UIImageView+LoadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A2434CB61DC73C7600C64AA5 /* UIImageView+LoadImage.m */; };
 		A24B1EB31DAF281F00F7F5C9 /* nav_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A24B1EB21DAF281F00F7F5C9 /* nav_head@2x.png */; };
 		A24B1EB51DAF285F00F7F5C9 /* nav_head@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A24B1EB41DAF285F00F7F5C9 /* nav_head@3x.png */; };
 		A26AB3911DAC79D500D58CBC /* LOLNewsClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A26AB3901DAC79D500D58CBC /* LOLNewsClassModel.m */; };
@@ -163,6 +168,15 @@
 		A22BFEC11DAB95A800E2585C /* LOLReportView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLReportView.m; sourceTree = "<group>"; };
 		A22BFEC31DAB95C200E2585C /* LOLNewsImagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLNewsImagesCell.h; sourceTree = "<group>"; };
 		A22BFEC41DAB95C200E2585C /* LOLNewsImagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOLNewsImagesCell.m; sourceTree = "<group>"; };
+		A23C0F2F1DC2F97B00885612 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		A2434CAF1DC73C7600C64AA5 /* JPLoopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPLoopView.h; sourceTree = "<group>"; };
+		A2434CB01DC73C7600C64AA5 /* JPLoopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPLoopView.m; sourceTree = "<group>"; };
+		A2434CB11DC73C7600C64AA5 /* JPLoopViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPLoopViewCell.h; sourceTree = "<group>"; };
+		A2434CB21DC73C7600C64AA5 /* JPLoopViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPLoopViewCell.m; sourceTree = "<group>"; };
+		A2434CB31DC73C7600C64AA5 /* JPLoopViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPLoopViewLayout.h; sourceTree = "<group>"; };
+		A2434CB41DC73C7600C64AA5 /* JPLoopViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPLoopViewLayout.m; sourceTree = "<group>"; };
+		A2434CB51DC73C7600C64AA5 /* UIImageView+LoadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LoadImage.h"; sourceTree = "<group>"; };
+		A2434CB61DC73C7600C64AA5 /* UIImageView+LoadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LoadImage.m"; sourceTree = "<group>"; };
 		A24B1EB21DAF281F00F7F5C9 /* nav_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_head@2x.png"; sourceTree = "<group>"; };
 		A24B1EB41DAF285F00F7F5C9 /* nav_head@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_head@3x.png"; sourceTree = "<group>"; };
 		A26AB38F1DAC79D500D58CBC /* LOLNewsClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLNewsClassModel.h; sourceTree = "<group>"; };
@@ -256,6 +270,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A23C0F301DC2F97B00885612 /* libsqlite3.0.tbd in Frameworks */,
 				8181234488B7BD07AD84C711 /* libPods-LOL Helper.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,6 +358,21 @@
 				A22BFEA41DAB840100E2585C /* personal_refresh_loading28@2x.png */,
 			);
 			path = refresh;
+			sourceTree = "<group>";
+		};
+		A2434CAE1DC73C7600C64AA5 /* JPLoopView */ = {
+			isa = PBXGroup;
+			children = (
+				A2434CAF1DC73C7600C64AA5 /* JPLoopView.h */,
+				A2434CB01DC73C7600C64AA5 /* JPLoopView.m */,
+				A2434CB11DC73C7600C64AA5 /* JPLoopViewCell.h */,
+				A2434CB21DC73C7600C64AA5 /* JPLoopViewCell.m */,
+				A2434CB31DC73C7600C64AA5 /* JPLoopViewLayout.h */,
+				A2434CB41DC73C7600C64AA5 /* JPLoopViewLayout.m */,
+				A2434CB51DC73C7600C64AA5 /* UIImageView+LoadImage.h */,
+				A2434CB61DC73C7600C64AA5 /* UIImageView+LoadImage.m */,
+			);
+			path = JPLoopView;
 			sourceTree = "<group>";
 		};
 		A27189991DAA1746003C7B87 = {
@@ -540,6 +570,7 @@
 		A2718A1C1DAA2B34003C7B87 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				A2434CAE1DC73C7600C64AA5 /* JPLoopView */,
 				A2718A1D1DAA2B34003C7B87 /* CustomTopView.h */,
 				A2718A1E1DAA2B34003C7B87 /* CustomTopView.m */,
 				A2718A1F1DAA2B34003C7B87 /* ImageScrollView.h */,
@@ -578,6 +609,7 @@
 		DA60623465B6ED7AEFBA48EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A23C0F2F1DC2F97B00885612 /* libsqlite3.0.tbd */,
 				DDF0B83CD7AC9D2FED3F2361 /* libPods-LOL Helper.a */,
 			);
 			name = Frameworks;
@@ -830,6 +862,7 @@
 				A27189FD1DAA1FDB003C7B87 /* UIView+Frame.m in Sources */,
 				A2718A041DAA21FF003C7B87 /* LOLBaseViewController.m in Sources */,
 				A22BFE7A1DAB34D400E2585C /* LOLNewsScrollCell.m in Sources */,
+				A2434CB71DC73C7600C64AA5 /* JPLoopView.m in Sources */,
 				A2718A211DAA2B34003C7B87 /* CustomTopView.m in Sources */,
 				A27189FC1DAA1FDB003C7B87 /* UIView+BlockGesture.m in Sources */,
 				A27189EC1DAA1870003C7B87 /* LOLMainRootController.m in Sources */,
@@ -839,6 +872,7 @@
 				A22BFEC51DAB95C200E2585C /* LOLNewsImagesCell.m in Sources */,
 				A2718A071DAA2495003C7B87 /* LOLNavigationController.m in Sources */,
 				A27189FF1DAA1FDB003C7B87 /* UIView+Visuals.m in Sources */,
+				A2434CBA1DC73C7600C64AA5 /* UIImageView+LoadImage.m in Sources */,
 				A26AB3941DAC88F600D58CBC /* LOLNewsSpecialClassCell.m in Sources */,
 				A22BFE871DAB7A7400E2585C /* LOLBaseMethod.m in Sources */,
 				A26AB3911DAC79D500D58CBC /* LOLNewsClassModel.m in Sources */,
@@ -849,7 +883,9 @@
 				A2718A0F1DAA2549003C7B87 /* LOLNewsController.m in Sources */,
 				A26AB3971DAC8A6F00D58CBC /* LOLNewsSpecialClassView.m in Sources */,
 				A2718A221DAA2B34003C7B87 /* ImageScrollView.m in Sources */,
+				A2434CB81DC73C7600C64AA5 /* JPLoopViewCell.m in Sources */,
 				A26AB39D1DACEA5500D58CBC /* LOLNewsDetailController.m in Sources */,
+				A2434CB91DC73C7600C64AA5 /* JPLoopViewLayout.m in Sources */,
 				A22BFE831DAB659600E2585C /* LOLNewsListCell.m in Sources */,
 				A27189A71DAA1746003C7B87 /* main.m in Sources */,
 				A22BFE771DAB322500E2585C /* LOLRequest.m in Sources */,
